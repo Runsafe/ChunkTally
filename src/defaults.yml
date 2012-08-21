@@ -1,0 +1,3 @@
+audit.entity.limit: 50
+audit.entity.worlds:
+- world

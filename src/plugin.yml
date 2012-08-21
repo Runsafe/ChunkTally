@@ -1,0 +1,5 @@
+name: ChunkTally
+main: no.runsafe.chunktally.Plugin
+version: 1.0
+author: mortenn
+description: Monitor entity counts in chunks as they load
