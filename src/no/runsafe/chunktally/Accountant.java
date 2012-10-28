@@ -30,9 +30,11 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		}
 	}
 
-	public void AuditEntitiesAboveLimit(RunsafeChunk chunk)
+	private void AuditEntitiesAboveLimit(RunsafeChunk chunk)
 	{
 		List<RunsafeEntity> entities = chunk.getEntities();
+		if (entities == null)
+			return;
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
 		for (RunsafeEntity entity : entities)
 		{
