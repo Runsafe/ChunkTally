@@ -13,9 +13,8 @@ import java.util.logging.Level;
 
 public class Accountant implements IChunkLoad, IConfigurationChanged
 {
-	public Accountant(IConfiguration config, IOutput output)
+	public Accountant(IOutput output)
 	{
-		this.config = config;
 		this.console = output;
 	}
 
@@ -71,14 +70,13 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 	}
 
 	@Override
-	public void OnConfigurationChanged()
+	public void OnConfigurationChanged(IConfiguration config)
 	{
 		chunkEntityAudit = config.getConfigValueAsInt("audit.entity.limit");
 		auditedWorlds.clear();
 		auditedWorlds.addAll(config.getConfigValueAsList("audit.entity.worlds"));
 	}
 
-	private final IConfiguration config;
 	private final IOutput console;
 	private final ArrayList<String> auditedWorlds = new ArrayList<String>();
 	private int chunkEntityAudit;
