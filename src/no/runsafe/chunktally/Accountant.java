@@ -48,7 +48,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		HashMap<String, RunsafeLocation> locations = new HashMap<String, RunsafeLocation>();
 		for (RunsafeEntity entity : entities)
 		{
-			String name = entity.getRaw().getType().name();
+			String name = entity.getRaw().getType().name().toLowerCase();
 			if (!locations.containsKey(name))
 				locations.put(name, entity.getLocation());
 			if (!counts.containsKey(name))
