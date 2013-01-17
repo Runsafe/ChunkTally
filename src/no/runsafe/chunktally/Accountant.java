@@ -56,7 +56,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 			else
 				counts.put(name, counts.get(name) + 1);
 		}
-		for (String type : counts.keySet())
+		for (String type : counts.keySet().toArray(new String[counts.size()]))
 		{
 			if (limits.containsKey(type))
 			{
