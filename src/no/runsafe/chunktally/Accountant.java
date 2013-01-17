@@ -80,7 +80,6 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 				return o2.getValue().compareTo(o1.getValue());
 			}
 		});
-		Map.Entry<String, Integer> max = as.get(0);
 		StringBuilder stats = new StringBuilder();
 		for (String type : counts.keySet())
 			stats.append(
@@ -100,8 +99,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 			chunk.getZ(),
 			entities.size(),
 			auditLevel,
-			max.getValue(),
-			max.getKey()
+			stats.toString()
 		);
 	}
 
