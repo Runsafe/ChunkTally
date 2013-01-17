@@ -1,3 +1,7 @@
-audit.entity.limit: 50
+audit.entity.inspect: 50
+audit.entity.limit.default: 50
+audit.entity.limit.item: 100
 audit.entity.worlds:
 - world
+- world_nether
+- world_the_end
