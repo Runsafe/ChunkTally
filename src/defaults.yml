@@ -5,3 +5,4 @@ audit.entity.worlds:
 - world
 - world_nether
 - world_the_end
+autoRemoveLostArrows: true

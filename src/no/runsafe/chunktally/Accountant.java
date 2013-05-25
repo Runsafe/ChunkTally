@@ -6,6 +6,7 @@ import no.runsafe.framework.event.world.IChunkLoad;
 import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.chunk.RunsafeChunk;
+import no.runsafe.framework.server.entity.ProjectileEntity;
 import no.runsafe.framework.server.entity.RunsafeEntity;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		auditedWorlds.clear();
 		auditedWorlds.addAll(config.getConfigValueAsList("audit.entity.worlds"));
 		auditLevel = config.getConfigValueAsInt("audit.entity.inspect");
+		autoRemoveLostArrows = config.getConfigValueAsBoolean("autoRemoveLostArrows");
 	}
 
 	private void AuditEntitiesAboveLimit(RunsafeChunk chunk)
@@ -82,6 +84,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		});
 		StringBuilder stats = new StringBuilder();
 		for (String type : counts.keySet())
+		{
 			stats.append(
 				String.format(
 					"  %d x %s (%d,%d,%d)",
@@ -91,6 +94,16 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 					locations.get(type).getBlockZ()
 				)
 			);
+
+			if (type.equals("arrow") && this.autoRemoveLostArrows && chunk.getX() + chunk.getZ() == 0)
+			{
+				for (RunsafeEntity entity : chunk.getEntities())
+					if (entity.getEntityType() == ProjectileEntity.Arrow)
+						entity.remove();
+
+				console.writeColoured("&2Automatically removed lost arrows!");
+			}
+		}
 		console.writeColoured(
 			"&cChunk [%s,%d,%d] is above entity limit! %d > %d&r\n%s",
 			Level.WARNING,
@@ -107,4 +120,5 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 	private final ArrayList<String> auditedWorlds = new ArrayList<String>();
 	private final HashMap<String, Integer> limits = new HashMap<String, Integer>();
 	private int auditLevel;
+	private boolean autoRemoveLostArrows;
 }
