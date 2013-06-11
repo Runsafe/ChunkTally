@@ -1,13 +1,13 @@
 package no.runsafe.chunktally;
 
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IConfigurationChanged;
-import no.runsafe.framework.event.world.IChunkLoad;
-import no.runsafe.framework.output.IOutput;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.chunk.RunsafeChunk;
-import no.runsafe.framework.server.entity.ProjectileEntity;
-import no.runsafe.framework.server.entity.RunsafeEntity;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.event.world.IChunkLoad;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.chunk.RunsafeChunk;
+import no.runsafe.framework.minecraft.entity.ProjectileEntity;
+import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 
 import java.util.*;
 import java.util.logging.Level;
