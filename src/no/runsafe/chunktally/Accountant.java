@@ -1,10 +1,10 @@
 package no.runsafe.chunktally;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.world.IChunkLoad;
-import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.chunk.RunsafeChunk;
 import no.runsafe.framework.minecraft.entity.ProjectileEntity;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
@@ -47,7 +47,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		if (entities == null)
 			return;
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
-		HashMap<String, RunsafeLocation> locations = new HashMap<String, RunsafeLocation>();
+		HashMap<String, ILocation> locations = new HashMap<String, ILocation>();
 		for (RunsafeEntity entity : entities)
 		{
 			String name = entity.getRaw().getType().name().toLowerCase();
