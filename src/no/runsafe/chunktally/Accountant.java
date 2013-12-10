@@ -2,9 +2,9 @@ package no.runsafe.chunktally;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.world.IChunkLoad;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.minecraft.chunk.RunsafeChunk;
 import no.runsafe.framework.minecraft.entity.ProjectileEntity;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
@@ -14,7 +14,7 @@ import java.util.logging.Level;
 
 public class Accountant implements IChunkLoad, IConfigurationChanged
 {
-	public Accountant(IOutput output)
+	public Accountant(IConsole output)
 	{
 		this.console = output;
 	}
@@ -116,7 +116,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		);
 	}
 
-	private final IOutput console;
+	private final IConsole console;
 	private final ArrayList<String> auditedWorlds = new ArrayList<String>();
 	private final HashMap<String, Integer> limits = new HashMap<String, Integer>();
 	private int auditLevel;
