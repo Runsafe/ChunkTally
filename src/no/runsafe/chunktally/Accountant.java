@@ -10,7 +10,6 @@ import no.runsafe.framework.minecraft.entity.ProjectileEntity;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 
 import java.util.*;
-import java.util.logging.Level;
 
 public class Accountant implements IChunkLoad, IConfigurationChanged
 {
@@ -101,12 +100,11 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 					if (entity.getEntityType() == ProjectileEntity.Arrow)
 						entity.remove();
 
-				console.writeColoured("&2Automatically removed lost arrows!");
+				console.logInformation("&2Automatically removed lost arrows!");
 			}
 		}
-		console.writeColoured(
+		console.logWarning(
 			"&cChunk [%s,%d,%d] is above entity limit! %d > %d&r\n%s",
-			Level.WARNING,
 			chunk.getWorld().getName(),
 			chunk.getX(),
 			chunk.getZ(),
