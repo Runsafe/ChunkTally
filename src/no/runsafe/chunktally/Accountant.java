@@ -2,10 +2,10 @@ package no.runsafe.chunktally;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
+import no.runsafe.framework.api.chunk.IChunk;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.world.IChunkLoad;
 import no.runsafe.framework.api.log.IConsole;
-import no.runsafe.framework.minecraft.chunk.RunsafeChunk;
 import no.runsafe.framework.minecraft.entity.ProjectileEntity;
 import no.runsafe.framework.minecraft.entity.RunsafeEntity;
 
@@ -19,7 +19,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 	}
 
 	@Override
-	public void OnChunkLoad(RunsafeChunk chunk)
+	public void OnChunkLoad(IChunk chunk)
 	{
 		if (chunk.getEntities().size() > auditLevel)
 		{
@@ -40,7 +40,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		autoRemoveLostArrows = config.getConfigValueAsBoolean("autoRemoveLostArrows");
 	}
 
-	private void AuditEntitiesAboveLimit(RunsafeChunk chunk)
+	private void AuditEntitiesAboveLimit(IChunk chunk)
 	{
 		List<RunsafeEntity> entities = chunk.getEntities();
 		if (entities == null)
@@ -104,13 +104,13 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 			}
 		}
 		console.logWarning(
-			"&cChunk [%s,%d,%d] is above entity limit! %d > %d&r\n%s",
-			chunk.getWorld().getName(),
-			chunk.getX(),
-			chunk.getZ(),
-			entities.size(),
-			auditLevel,
-			stats.toString()
+				"&cChunk [%s,%d,%d] is above entity limit! %d > %d&r\n%s",
+				chunk.getWorld().getName(),
+				chunk.getX(),
+				chunk.getZ(),
+				entities.size(),
+				auditLevel,
+				stats.toString()
 		);
 	}
 
