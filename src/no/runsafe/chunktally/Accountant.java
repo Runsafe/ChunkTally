@@ -43,10 +43,8 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 	private void AuditEntitiesAboveLimit(IChunk chunk)
 	{
 		List<RunsafeEntity> entities = chunk.getEntities();
-		if (entities == null)
-			return;
-		HashMap<String, Integer> counts = new HashMap<String, Integer>();
-		HashMap<String, ILocation> locations = new HashMap<String, ILocation>();
+		HashMap<String, Integer> counts = new HashMap<>();
+		HashMap<String, ILocation> locations = new HashMap<>();
 		for (RunsafeEntity entity : entities)
 		{
 			String name = entity.getRaw().getType().name().toLowerCase();
@@ -57,7 +55,7 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 			else
 				counts.put(name, counts.get(name) + 1);
 		}
-		for (String type : counts.keySet().toArray(new String[counts.size()]))
+		for (String type : counts.keySet().toArray(new String[0]))
 		{
 			if (limits.containsKey(type))
 			{
@@ -73,14 +71,8 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 		if (finalCount < auditLevel)
 			return;
 
-		ArrayList<Map.Entry<String, Integer>> as = new ArrayList<Map.Entry<String, Integer>>(counts.entrySet());
-		Collections.sort(as, new Comparator<Map.Entry<String, Integer>>()
-		{
-			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
-			{
-				return o2.getValue().compareTo(o1.getValue());
-			}
-		});
+		//ArrayList<Map.Entry<String, Integer>> as = new ArrayList<>(counts.entrySet());
+		//as.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 		StringBuilder stats = new StringBuilder();
 		for (String type : counts.keySet())
 		{
@@ -115,8 +107,8 @@ public class Accountant implements IChunkLoad, IConfigurationChanged
 	}
 
 	private final IConsole console;
-	private final ArrayList<String> auditedWorlds = new ArrayList<String>();
-	private final HashMap<String, Integer> limits = new HashMap<String, Integer>();
+	private final ArrayList<String> auditedWorlds = new ArrayList<>();
+	private final HashMap<String, Integer> limits = new HashMap<>();
 	private int auditLevel;
 	private boolean autoRemoveLostArrows;
 }
