@@ -6,8 +6,7 @@ pipeline {
   }
   environment { plugin = "ChunkTally" }
   triggers {
-    upstream '/Runsafe/Framework/master'
-    upstream '/Runsafe/Framework/develop'
+    upstream '/Runsafe/Framework/master,/Runsafe/Framework/develop'
     pollSCM '@monthly'
   }
   stages {
